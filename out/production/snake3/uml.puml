@@ -1,0 +1,126 @@
+@startuml
+
+class Obstacle{
+    + int obstacle
+    + int[] obstacleX
++ int[] obstacleY
++ random_spawn(Snake)
+}
+
+class Food {
+- int x;
+- int y;
++ random_spawn(Snake, SnakeAI)
++ getX() : int
++ getY() : int
+}
+
+class Frog {
+- int x;
+- int y;
++ random_spawn(Snake)
++ getX() : int
++ getY() : int
+}
+
+class Snake {
+    - ArrayList<> body
+    - int w
+    -int h
+    -int d
+    - String move
+    + move()
+    + grow()
+    + getBody() : ArrayList<>
+    + getX() : int
+    + getY() : int
+    + up()
+    + down()
+    + left()
+    + right()
+}
+
+class SnakeAI {
+    - ArrayList<> body
+    - int w
+    -int h
+    -int d
+    - String move
+    - Food f
+    - SnakeAI s
+    + int x
+    + int y
+    + move()
+        + grow()
+        + getBody() : ArrayList<>
+        + getX() : int
+        + getY() : int
+
+}
+
+class Graphics{
+    - Timer t
+    + String state
+    - Snake s
+    - SnakeAI sAI
+    - Food f
+    - Frog frog
+    - Game game
+    - Obstacle o
+    + Random random
+    + paintComponent(java.awt.Graphics)
+    + actionPerformed(ActionEvent)
+}
+
+class Game{
+    - Snake player;
+    - SnakeAI playerAI;
+    Food food;
+    - Frog frog;
+    - Graphics graphics;
+    - Obstacle obstacle
+    + FileWriter file
+    - JFrame window
+    + static final int width
+    + static final int height
+    + static final int dimension
+    + start()
+    + restart()
+    + update()
+    - check_wall_collision() : boolean
+    - check_food_collision() : boolean
+    - check_foodAI_collision() : boolean
+    - check_frog_collision() : boolean
+    - check_obstacle_collision() : boolean
+    - check_self_collision() : boolean
+    - check_selfAI_collision() : boolean
+    + keyTyped(KeyEvent)
+    + keyPressed(KeyEvent)
+    + keyReleased(KeyEvent)
+    + getPlayer() : Snake
+    + getPlayerAI() : SnakeAI
+    + getFood() : Food
+    + getFrog() : Frog
+    + getObstacle() : Obstacle
+
+
+}
+
+class Main {
++ main(String[])
+}
+
+Obstacle -- Graphics
+Obstacle -- Game
+Frog -- Graphics
+Frog -- Game
+Snake -- Graphics
+Snake -- Game
+SnakeAI -- Graphics
+SnakeAI -- Game
+Food -- Graphics
+Food -- Game
+Game -- Graphics
+Main -- Game
+
+@enduml
